@@ -65,5 +65,10 @@ module Yehuda
       db = Yehuda::Database.new FILE
       assert_equal 32, db.btl_fraction
     end
+
+    def test_file_changes
+      db = Yehuda::Database.new FILE
+      assert_equal 0, db.file_changes
+    end
   end
 end
