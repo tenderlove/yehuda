@@ -1,6 +1,7 @@
 module Yehuda
   class Database
     attr_accessor :page_size, :write_version, :read_version, :page_footer
+    attr_accessor :itp_fraction, :btp_fraction, :btl_fraction
     attr_reader :fh
 
     alias :to_io :fh
@@ -18,6 +19,9 @@ module Yehuda
       @write_version = @fh.read(1).unpack('C').first
       @read_version  = @fh.read(1).unpack('C').first
       @page_footer   = @fh.read(1).unpack('C').first
+      @itp_fraction = @fh.read(1).unpack('C').first
+      @btp_fraction = @fh.read(1).unpack('C').first
+      @btl_fraction = @fh.read(1).unpack('C').first
     end
 
     private

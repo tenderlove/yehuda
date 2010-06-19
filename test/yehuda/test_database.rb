@@ -50,5 +50,20 @@ module Yehuda
       db = Yehuda::Database.new FILE
       assert_equal 0, db.page_footer
     end
+
+    def test_index_tree_faction
+      db = Yehuda::Database.new FILE
+      assert_equal 64, db.itp_fraction
+    end
+
+    def test_btp_fraction
+      db = Yehuda::Database.new FILE
+      assert_equal 32, db.btp_fraction
+    end
+
+    def test_btl_fraction
+      db = Yehuda::Database.new FILE
+      assert_equal 32, db.btl_fraction
+    end
   end
 end
