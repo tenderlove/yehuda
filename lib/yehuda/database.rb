@@ -6,10 +6,10 @@ module Yehuda
     alias :to_io :fh
 
     def initialize file
-      if IO === file || StringIO === file
-        @fh = file
-      else
+      if String === file
         @fh = File.open file, File::RDWR
+      else
+        @fh = file
       end
 
       chk = @fh.read(16).force_encoding('UTF-8')

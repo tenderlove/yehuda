@@ -1,6 +1,7 @@
 require 'yehuda'
 require 'minitest/autorun'
 require 'stringio'
+require 'tempfile'
 
 module Yehuda
   class TestDatabase < MiniTest::Unit::TestCase
@@ -28,6 +29,16 @@ module Yehuda
       assert_equal 1, db.write_version
       assert_equal 2048, db.page_size
       assert_equal fh, db.to_io
+    end
+
+    def test_baddb
+      s    = File.binread(FILE)
+      s[0] = 'f'
+      fh = StringIO.new s
+
+      assert_raises(RuntimeError) do
+        Yehuda::Database.new fh
+      end
     end
   end
 end
