@@ -40,5 +40,15 @@ module Yehuda
         Yehuda::Database.new fh
       end
     end
+
+    def test_read_version
+      db = Yehuda::Database.new FILE
+      assert_equal 1, db.read_version
+    end
+
+    def test_page_footer
+      db = Yehuda::Database.new FILE
+      assert_equal 0, db.page_footer
+    end
   end
 end

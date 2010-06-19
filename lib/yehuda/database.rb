@@ -1,6 +1,6 @@
 module Yehuda
   class Database
-    attr_accessor :page_size, :write_version
+    attr_accessor :page_size, :write_version, :read_version, :page_footer
     attr_reader :fh
 
     alias :to_io :fh
@@ -16,6 +16,8 @@ module Yehuda
       raise "not a sqlite database" unless chk == header
       @page_size     = @fh.read(2).unpack('n').first
       @write_version = @fh.read(1).unpack('C').first
+      @read_version = @fh.read(1).unpack('C').first
+      @page_footer = @fh.read(1).unpack('C').first
     end
 
     private
