@@ -1,5 +1,6 @@
 require 'yehuda'
 require 'minitest/autorun'
+require 'stringio'
 
 module Yehuda
   class TestDatabase < MiniTest::Unit::TestCase
@@ -13,6 +14,15 @@ module Yehuda
 
     def test_io
       fh = File.open(FILE, File::RDWR)
+
+      db = Yehuda::Database.new fh
+      assert_equal 1, db.write_version
+      assert_equal 2048, db.page_size
+      assert_equal fh, db.to_io
+    end
+
+    def test_stringio
+      fh = StringIO.new File.binread(FILE)
 
       db = Yehuda::Database.new fh
       assert_equal 1, db.write_version

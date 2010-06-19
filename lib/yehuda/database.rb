@@ -6,7 +6,7 @@ module Yehuda
     alias :to_io :fh
 
     def initialize file
-      if IO === file
+      if IO === file || StringIO === file
         @fh = file
       else
         @fh = File.open file, File::RDWR
