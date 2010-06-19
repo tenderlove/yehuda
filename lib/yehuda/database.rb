@@ -16,8 +16,8 @@ module Yehuda
       raise "not a sqlite database" unless chk == header
       @page_size     = @fh.read(2).unpack('n').first
       @write_version = @fh.read(1).unpack('C').first
-      @read_version = @fh.read(1).unpack('C').first
-      @page_footer = @fh.read(1).unpack('C').first
+      @read_version  = @fh.read(1).unpack('C').first
+      @page_footer   = @fh.read(1).unpack('C').first
     end
 
     private
