@@ -10,5 +10,14 @@ module Yehuda
       assert_equal 1, db.write_version
       assert_equal 2048, db.page_size
     end
+
+    def test_io
+      fh = File.open(FILE, File::RDWR)
+
+      db = Yehuda::Database.new fh
+      assert_equal 1, db.write_version
+      assert_equal 2048, db.page_size
+      assert_equal fh, db.to_io
+    end
   end
 end
